@@ -197,6 +197,20 @@ class RayJob final :
   ::std::string* release_runtime_env();
   void set_allocated_runtime_env(::std::string* runtime_env);
 
+  // string submitter_pod_service_account_name = 5;
+  void clear_submitter_pod_service_account_name();
+  static const int kSubmitterPodServiceAccountNameFieldNumber = 5;
+  const ::std::string& submitter_pod_service_account_name() const;
+  void set_submitter_pod_service_account_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_submitter_pod_service_account_name(::std::string&& value);
+  #endif
+  void set_submitter_pod_service_account_name(const char* value);
+  void set_submitter_pod_service_account_name(const char* value, size_t size);
+  ::std::string* mutable_submitter_pod_service_account_name();
+  ::std::string* release_submitter_pod_service_account_name();
+  void set_allocated_submitter_pod_service_account_name(::std::string* submitter_pod_service_account_name);
+
   // .flyteidl.plugins.RayCluster ray_cluster = 1;
   bool has_ray_cluster() const;
   void clear_ray_cluster();
@@ -224,6 +238,7 @@ class RayJob final :
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr runtime_env_;
+  ::google::protobuf::internal::ArenaStringPtr submitter_pod_service_account_name_;
   ::flyteidl::plugins::RayCluster* ray_cluster_;
   bool shutdown_after_job_finishes_;
   ::google::protobuf::int32 ttl_seconds_after_finished_;
@@ -832,6 +847,59 @@ inline void RayJob::set_ttl_seconds_after_finished(::google::protobuf::int32 val
   
   ttl_seconds_after_finished_ = value;
   // @@protoc_insertion_point(field_set:flyteidl.plugins.RayJob.ttl_seconds_after_finished)
+}
+
+// string submitter_pod_service_account_name = 5;
+inline void RayJob::clear_submitter_pod_service_account_name() {
+  submitter_pod_service_account_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RayJob::submitter_pod_service_account_name() const {
+  // @@protoc_insertion_point(field_get:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+  return submitter_pod_service_account_name_.GetNoArena();
+}
+inline void RayJob::set_submitter_pod_service_account_name(const ::std::string& value) {
+  
+  submitter_pod_service_account_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+}
+#if LANG_CXX11
+inline void RayJob::set_submitter_pod_service_account_name(::std::string&& value) {
+  
+  submitter_pod_service_account_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+}
+#endif
+inline void RayJob::set_submitter_pod_service_account_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  submitter_pod_service_account_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+}
+inline void RayJob::set_submitter_pod_service_account_name(const char* value, size_t size) {
+  
+  submitter_pod_service_account_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+}
+inline ::std::string* RayJob::mutable_submitter_pod_service_account_name() {
+  
+  // @@protoc_insertion_point(field_mutable:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+  return submitter_pod_service_account_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RayJob::release_submitter_pod_service_account_name() {
+  // @@protoc_insertion_point(field_release:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
+  
+  return submitter_pod_service_account_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RayJob::set_allocated_submitter_pod_service_account_name(::std::string* submitter_pod_service_account_name) {
+  if (submitter_pod_service_account_name != nullptr) {
+    
+  } else {
+    
+  }
+  submitter_pod_service_account_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), submitter_pod_service_account_name);
+  // @@protoc_insertion_point(field_set_allocated:flyteidl.plugins.RayJob.submitter_pod_service_account_name)
 }
 
 // -------------------------------------------------------------------

@@ -80,6 +80,24 @@ public final class Ray {
      * <code>int32 ttl_seconds_after_finished = 4;</code>
      */
     int getTtlSecondsAfterFinished();
+
+    /**
+     * <pre>
+     * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+     * </pre>
+     *
+     * <code>string submitter_pod_service_account_name = 5;</code>
+     */
+    java.lang.String getSubmitterPodServiceAccountName();
+    /**
+     * <pre>
+     * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+     * </pre>
+     *
+     * <code>string submitter_pod_service_account_name = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getSubmitterPodServiceAccountNameBytes();
   }
   /**
    * <pre>
@@ -99,6 +117,7 @@ public final class Ray {
     }
     private RayJob() {
       runtimeEnv_ = "";
+      submitterPodServiceAccountName_ = "";
     }
 
     @java.lang.Override
@@ -152,6 +171,12 @@ public final class Ray {
             case 32: {
 
               ttlSecondsAfterFinished_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              submitterPodServiceAccountName_ = s;
               break;
             }
             default: {
@@ -289,6 +314,48 @@ public final class Ray {
       return ttlSecondsAfterFinished_;
     }
 
+    public static final int SUBMITTER_POD_SERVICE_ACCOUNT_NAME_FIELD_NUMBER = 5;
+    private volatile java.lang.Object submitterPodServiceAccountName_;
+    /**
+     * <pre>
+     * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+     * </pre>
+     *
+     * <code>string submitter_pod_service_account_name = 5;</code>
+     */
+    public java.lang.String getSubmitterPodServiceAccountName() {
+      java.lang.Object ref = submitterPodServiceAccountName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        submitterPodServiceAccountName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+     * </pre>
+     *
+     * <code>string submitter_pod_service_account_name = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSubmitterPodServiceAccountNameBytes() {
+      java.lang.Object ref = submitterPodServiceAccountName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        submitterPodServiceAccountName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -315,6 +382,9 @@ public final class Ray {
       if (ttlSecondsAfterFinished_ != 0) {
         output.writeInt32(4, ttlSecondsAfterFinished_);
       }
+      if (!getSubmitterPodServiceAccountNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, submitterPodServiceAccountName_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -338,6 +408,9 @@ public final class Ray {
       if (ttlSecondsAfterFinished_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, ttlSecondsAfterFinished_);
+      }
+      if (!getSubmitterPodServiceAccountNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, submitterPodServiceAccountName_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -365,6 +438,8 @@ public final class Ray {
           != other.getShutdownAfterJobFinishes()) return false;
       if (getTtlSecondsAfterFinished()
           != other.getTtlSecondsAfterFinished()) return false;
+      if (!getSubmitterPodServiceAccountName()
+          .equals(other.getSubmitterPodServiceAccountName())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -387,6 +462,8 @@ public final class Ray {
           getShutdownAfterJobFinishes());
       hash = (37 * hash) + TTL_SECONDS_AFTER_FINISHED_FIELD_NUMBER;
       hash = (53 * hash) + getTtlSecondsAfterFinished();
+      hash = (37 * hash) + SUBMITTER_POD_SERVICE_ACCOUNT_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getSubmitterPodServiceAccountName().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -536,6 +613,8 @@ public final class Ray {
 
         ttlSecondsAfterFinished_ = 0;
 
+        submitterPodServiceAccountName_ = "";
+
         return this;
       }
 
@@ -570,6 +649,7 @@ public final class Ray {
         result.runtimeEnv_ = runtimeEnv_;
         result.shutdownAfterJobFinishes_ = shutdownAfterJobFinishes_;
         result.ttlSecondsAfterFinished_ = ttlSecondsAfterFinished_;
+        result.submitterPodServiceAccountName_ = submitterPodServiceAccountName_;
         onBuilt();
         return result;
       }
@@ -630,6 +710,10 @@ public final class Ray {
         }
         if (other.getTtlSecondsAfterFinished() != 0) {
           setTtlSecondsAfterFinished(other.getTtlSecondsAfterFinished());
+        }
+        if (!other.getSubmitterPodServiceAccountName().isEmpty()) {
+          submitterPodServiceAccountName_ = other.submitterPodServiceAccountName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -979,6 +1063,95 @@ public final class Ray {
       public Builder clearTtlSecondsAfterFinished() {
         
         ttlSecondsAfterFinished_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object submitterPodServiceAccountName_ = "";
+      /**
+       * <pre>
+       * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+       * </pre>
+       *
+       * <code>string submitter_pod_service_account_name = 5;</code>
+       */
+      public java.lang.String getSubmitterPodServiceAccountName() {
+        java.lang.Object ref = submitterPodServiceAccountName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          submitterPodServiceAccountName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+       * </pre>
+       *
+       * <code>string submitter_pod_service_account_name = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSubmitterPodServiceAccountNameBytes() {
+        java.lang.Object ref = submitterPodServiceAccountName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          submitterPodServiceAccountName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+       * </pre>
+       *
+       * <code>string submitter_pod_service_account_name = 5;</code>
+       */
+      public Builder setSubmitterPodServiceAccountName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        submitterPodServiceAccountName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+       * </pre>
+       *
+       * <code>string submitter_pod_service_account_name = 5;</code>
+       */
+      public Builder clearSubmitterPodServiceAccountName() {
+        
+        submitterPodServiceAccountName_ = getDefaultInstance().getSubmitterPodServiceAccountName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+       * </pre>
+       *
+       * <code>string submitter_pod_service_account_name = 5;</code>
+       */
+      public Builder setSubmitterPodServiceAccountNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        submitterPodServiceAccountName_ = value;
         onChanged();
         return this;
       }
@@ -4356,26 +4529,27 @@ public final class Ray {
   static {
     java.lang.String[] descriptorData = {
       "\n\032flyteidl/plugins/ray.proto\022\020flyteidl.p" +
-      "lugins\"\231\001\n\006RayJob\0221\n\013ray_cluster\030\001 \001(\0132\034" +
+      "lugins\"\305\001\n\006RayJob\0221\n\013ray_cluster\030\001 \001(\0132\034" +
       ".flyteidl.plugins.RayCluster\022\023\n\013runtime_" +
       "env\030\002 \001(\t\022#\n\033shutdown_after_job_finishes" +
       "\030\003 \001(\010\022\"\n\032ttl_seconds_after_finished\030\004 \001" +
-      "(\005\"\240\001\n\nRayCluster\0228\n\017head_group_spec\030\001 \001" +
-      "(\0132\037.flyteidl.plugins.HeadGroupSpec\022<\n\021w" +
-      "orker_group_spec\030\002 \003(\0132!.flyteidl.plugin" +
-      "s.WorkerGroupSpec\022\032\n\022enable_autoscaling\030" +
-      "\003 \001(\010\"\225\001\n\rHeadGroupSpec\022M\n\020ray_start_par" +
-      "ams\030\001 \003(\01323.flyteidl.plugins.HeadGroupSp" +
-      "ec.RayStartParamsEntry\0325\n\023RayStartParams" +
-      "Entry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\353\001" +
-      "\n\017WorkerGroupSpec\022\022\n\ngroup_name\030\001 \001(\t\022\020\n" +
-      "\010replicas\030\002 \001(\005\022\024\n\014min_replicas\030\003 \001(\005\022\024\n" +
-      "\014max_replicas\030\004 \001(\005\022O\n\020ray_start_params\030" +
-      "\005 \003(\01325.flyteidl.plugins.WorkerGroupSpec" +
-      ".RayStartParamsEntry\0325\n\023RayStartParamsEn" +
-      "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B?Z=g" +
-      "ithub.com/flyteorg/flyte/flyteidl/gen/pb" +
-      "-go/flyteidl/pluginsb\006proto3"
+      "(\005\022*\n\"submitter_pod_service_account_name" +
+      "\030\005 \001(\t\"\240\001\n\nRayCluster\0228\n\017head_group_spec" +
+      "\030\001 \001(\0132\037.flyteidl.plugins.HeadGroupSpec\022" +
+      "<\n\021worker_group_spec\030\002 \003(\0132!.flyteidl.pl" +
+      "ugins.WorkerGroupSpec\022\032\n\022enable_autoscal" +
+      "ing\030\003 \001(\010\"\225\001\n\rHeadGroupSpec\022M\n\020ray_start" +
+      "_params\030\001 \003(\01323.flyteidl.plugins.HeadGro" +
+      "upSpec.RayStartParamsEntry\0325\n\023RayStartPa" +
+      "ramsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028" +
+      "\001\"\353\001\n\017WorkerGroupSpec\022\022\n\ngroup_name\030\001 \001(" +
+      "\t\022\020\n\010replicas\030\002 \001(\005\022\024\n\014min_replicas\030\003 \001(" +
+      "\005\022\024\n\014max_replicas\030\004 \001(\005\022O\n\020ray_start_par" +
+      "ams\030\005 \003(\01325.flyteidl.plugins.WorkerGroup" +
+      "Spec.RayStartParamsEntry\0325\n\023RayStartPara" +
+      "msEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B" +
+      "?Z=github.com/flyteorg/flyte/flyteidl/ge" +
+      "n/pb-go/flyteidl/pluginsb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4394,7 +4568,7 @@ public final class Ray {
     internal_static_flyteidl_plugins_RayJob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_flyteidl_plugins_RayJob_descriptor,
-        new java.lang.String[] { "RayCluster", "RuntimeEnv", "ShutdownAfterJobFinishes", "TtlSecondsAfterFinished", });
+        new java.lang.String[] { "RayCluster", "RuntimeEnv", "ShutdownAfterJobFinishes", "TtlSecondsAfterFinished", "SubmitterPodServiceAccountName", });
     internal_static_flyteidl_plugins_RayCluster_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_flyteidl_plugins_RayCluster_fieldAccessorTable = new

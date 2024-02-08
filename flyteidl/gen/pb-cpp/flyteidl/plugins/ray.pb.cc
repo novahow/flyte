@@ -159,6 +159,7 @@ const ::google::protobuf::uint32 TableStruct_flyteidl_2fplugins_2fray_2eproto::o
   PROTOBUF_FIELD_OFFSET(::flyteidl::plugins::RayJob, runtime_env_),
   PROTOBUF_FIELD_OFFSET(::flyteidl::plugins::RayJob, shutdown_after_job_finishes_),
   PROTOBUF_FIELD_OFFSET(::flyteidl::plugins::RayJob, ttl_seconds_after_finished_),
+  PROTOBUF_FIELD_OFFSET(::flyteidl::plugins::RayJob, submitter_pod_service_account_name_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::flyteidl::plugins::RayCluster, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -204,11 +205,11 @@ const ::google::protobuf::uint32 TableStruct_flyteidl_2fplugins_2fray_2eproto::o
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::flyteidl::plugins::RayJob)},
-  { 9, -1, sizeof(::flyteidl::plugins::RayCluster)},
-  { 17, 24, sizeof(::flyteidl::plugins::HeadGroupSpec_RayStartParamsEntry_DoNotUse)},
-  { 26, -1, sizeof(::flyteidl::plugins::HeadGroupSpec)},
-  { 32, 39, sizeof(::flyteidl::plugins::WorkerGroupSpec_RayStartParamsEntry_DoNotUse)},
-  { 41, -1, sizeof(::flyteidl::plugins::WorkerGroupSpec)},
+  { 10, -1, sizeof(::flyteidl::plugins::RayCluster)},
+  { 18, 25, sizeof(::flyteidl::plugins::HeadGroupSpec_RayStartParamsEntry_DoNotUse)},
+  { 27, -1, sizeof(::flyteidl::plugins::HeadGroupSpec)},
+  { 33, 40, sizeof(::flyteidl::plugins::WorkerGroupSpec_RayStartParamsEntry_DoNotUse)},
+  { 42, -1, sizeof(::flyteidl::plugins::WorkerGroupSpec)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -228,31 +229,32 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 const char descriptor_table_protodef_flyteidl_2fplugins_2fray_2eproto[] =
   "\n\032flyteidl/plugins/ray.proto\022\020flyteidl.p"
-  "lugins\"\231\001\n\006RayJob\0221\n\013ray_cluster\030\001 \001(\0132\034"
+  "lugins\"\305\001\n\006RayJob\0221\n\013ray_cluster\030\001 \001(\0132\034"
   ".flyteidl.plugins.RayCluster\022\023\n\013runtime_"
   "env\030\002 \001(\t\022#\n\033shutdown_after_job_finishes"
   "\030\003 \001(\010\022\"\n\032ttl_seconds_after_finished\030\004 \001"
-  "(\005\"\240\001\n\nRayCluster\0228\n\017head_group_spec\030\001 \001"
-  "(\0132\037.flyteidl.plugins.HeadGroupSpec\022<\n\021w"
-  "orker_group_spec\030\002 \003(\0132!.flyteidl.plugin"
-  "s.WorkerGroupSpec\022\032\n\022enable_autoscaling\030"
-  "\003 \001(\010\"\225\001\n\rHeadGroupSpec\022M\n\020ray_start_par"
-  "ams\030\001 \003(\01323.flyteidl.plugins.HeadGroupSp"
-  "ec.RayStartParamsEntry\0325\n\023RayStartParams"
-  "Entry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\353\001"
-  "\n\017WorkerGroupSpec\022\022\n\ngroup_name\030\001 \001(\t\022\020\n"
-  "\010replicas\030\002 \001(\005\022\024\n\014min_replicas\030\003 \001(\005\022\024\n"
-  "\014max_replicas\030\004 \001(\005\022O\n\020ray_start_params\030"
-  "\005 \003(\01325.flyteidl.plugins.WorkerGroupSpec"
-  ".RayStartParamsEntry\0325\n\023RayStartParamsEn"
-  "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B\?Z=g"
-  "ithub.com/flyteorg/flyte/flyteidl/gen/pb"
-  "-go/flyteidl/pluginsb\006proto3"
+  "(\005\022*\n\"submitter_pod_service_account_name"
+  "\030\005 \001(\t\"\240\001\n\nRayCluster\0228\n\017head_group_spec"
+  "\030\001 \001(\0132\037.flyteidl.plugins.HeadGroupSpec\022"
+  "<\n\021worker_group_spec\030\002 \003(\0132!.flyteidl.pl"
+  "ugins.WorkerGroupSpec\022\032\n\022enable_autoscal"
+  "ing\030\003 \001(\010\"\225\001\n\rHeadGroupSpec\022M\n\020ray_start"
+  "_params\030\001 \003(\01323.flyteidl.plugins.HeadGro"
+  "upSpec.RayStartParamsEntry\0325\n\023RayStartPa"
+  "ramsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028"
+  "\001\"\353\001\n\017WorkerGroupSpec\022\022\n\ngroup_name\030\001 \001("
+  "\t\022\020\n\010replicas\030\002 \001(\005\022\024\n\014min_replicas\030\003 \001("
+  "\005\022\024\n\014max_replicas\030\004 \001(\005\022O\n\020ray_start_par"
+  "ams\030\005 \003(\01325.flyteidl.plugins.WorkerGroup"
+  "Spec.RayStartParamsEntry\0325\n\023RayStartPara"
+  "msEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B"
+  "\?Z=github.com/flyteorg/flyte/flyteidl/ge"
+  "n/pb-go/flyteidl/pluginsb\006proto3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_flyteidl_2fplugins_2fray_2eproto = {
   false, InitDefaults_flyteidl_2fplugins_2fray_2eproto, 
   descriptor_table_protodef_flyteidl_2fplugins_2fray_2eproto,
-  "flyteidl/plugins/ray.proto", &assign_descriptors_table_flyteidl_2fplugins_2fray_2eproto, 828,
+  "flyteidl/plugins/ray.proto", &assign_descriptors_table_flyteidl_2fplugins_2fray_2eproto, 872,
 };
 
 void AddDescriptors_flyteidl_2fplugins_2fray_2eproto() {
@@ -287,6 +289,7 @@ const int RayJob::kRayClusterFieldNumber;
 const int RayJob::kRuntimeEnvFieldNumber;
 const int RayJob::kShutdownAfterJobFinishesFieldNumber;
 const int RayJob::kTtlSecondsAfterFinishedFieldNumber;
+const int RayJob::kSubmitterPodServiceAccountNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RayJob::RayJob()
@@ -301,6 +304,10 @@ RayJob::RayJob(const RayJob& from)
   runtime_env_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.runtime_env().size() > 0) {
     runtime_env_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.runtime_env_);
+  }
+  submitter_pod_service_account_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.submitter_pod_service_account_name().size() > 0) {
+    submitter_pod_service_account_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.submitter_pod_service_account_name_);
   }
   if (from.has_ray_cluster()) {
     ray_cluster_ = new ::flyteidl::plugins::RayCluster(*from.ray_cluster_);
@@ -317,6 +324,7 @@ void RayJob::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_RayJob_flyteidl_2fplugins_2fray_2eproto.base);
   runtime_env_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  submitter_pod_service_account_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&ray_cluster_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&ttl_seconds_after_finished_) -
       reinterpret_cast<char*>(&ray_cluster_)) + sizeof(ttl_seconds_after_finished_));
@@ -329,6 +337,7 @@ RayJob::~RayJob() {
 
 void RayJob::SharedDtor() {
   runtime_env_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  submitter_pod_service_account_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete ray_cluster_;
 }
 
@@ -348,6 +357,7 @@ void RayJob::Clear() {
   (void) cached_has_bits;
 
   runtime_env_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  submitter_pod_service_account_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && ray_cluster_ != nullptr) {
     delete ray_cluster_;
   }
@@ -412,6 +422,22 @@ const char* RayJob::_InternalParse(const char* begin, const char* end, void* obj
         if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
         msg->set_ttl_seconds_after_finished(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // string submitter_pod_service_account_name = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("flyteidl.plugins.RayJob.submitter_pod_service_account_name");
+        object = msg->mutable_submitter_pod_service_account_name();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
         break;
       }
       default: {
@@ -500,6 +526,21 @@ bool RayJob::MergePartialFromCodedStream(
         break;
       }
 
+      // string submitter_pod_service_account_name = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_submitter_pod_service_account_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->submitter_pod_service_account_name().data(), static_cast<int>(this->submitter_pod_service_account_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "flyteidl.plugins.RayJob.submitter_pod_service_account_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -553,6 +594,16 @@ void RayJob::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->ttl_seconds_after_finished(), output);
   }
 
+  // string submitter_pod_service_account_name = 5;
+  if (this->submitter_pod_service_account_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->submitter_pod_service_account_name().data(), static_cast<int>(this->submitter_pod_service_account_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "flyteidl.plugins.RayJob.submitter_pod_service_account_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->submitter_pod_service_account_name(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -594,6 +645,17 @@ void RayJob::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->ttl_seconds_after_finished(), target);
   }
 
+  // string submitter_pod_service_account_name = 5;
+  if (this->submitter_pod_service_account_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->submitter_pod_service_account_name().data(), static_cast<int>(this->submitter_pod_service_account_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "flyteidl.plugins.RayJob.submitter_pod_service_account_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->submitter_pod_service_account_name(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -620,6 +682,13 @@ size_t RayJob::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->runtime_env());
+  }
+
+  // string submitter_pod_service_account_name = 5;
+  if (this->submitter_pod_service_account_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->submitter_pod_service_account_name());
   }
 
   // .flyteidl.plugins.RayCluster ray_cluster = 1;
@@ -672,6 +741,10 @@ void RayJob::MergeFrom(const RayJob& from) {
 
     runtime_env_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.runtime_env_);
   }
+  if (from.submitter_pod_service_account_name().size() > 0) {
+
+    submitter_pod_service_account_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.submitter_pod_service_account_name_);
+  }
   if (from.has_ray_cluster()) {
     mutable_ray_cluster()->::flyteidl::plugins::RayCluster::MergeFrom(from.ray_cluster());
   }
@@ -709,6 +782,8 @@ void RayJob::InternalSwap(RayJob* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   runtime_env_.Swap(&other->runtime_env_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  submitter_pod_service_account_name_.Swap(&other->submitter_pod_service_account_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(ray_cluster_, other->ray_cluster_);
   swap(shutdown_after_job_finishes_, other->shutdown_after_job_finishes_);

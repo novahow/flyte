@@ -8,7 +8,9 @@ import (
 	"strings"
 	"time"
 
+	rayv1 "github.com/ray-project/kuberay/ray-operator/apis/ray/v1"
 	rayv1alpha1 "github.com/ray-project/kuberay/ray-operator/apis/ray/v1alpha1"
+	raycommon "github.com/ray-project/kuberay/ray-operator/controllers/ray/common"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/scheme"
@@ -206,6 +208,26 @@ func (rayJobResourceHandler) BuildResource(ctx context.Context, taskCtx pluginsC
 		Spec:       jobSpec,
 		ObjectMeta: *objectMeta,
 	}
+
+	if rayJob.SubmitterPodServiceAccountName != "" {
+		rayClusterSpecMock := rayv1.RayClusterSpec{
+			HeadGroupSpec: rayv1.HeadGroupSpec{
+				Template: buildHeadPodTemplate(
+					&headPodSpec.Containers[primaryContainerIdx],
+					headPodSpec,
+					objectMeta,
+					taskCtx,
+				),
+			},
+		}
+		rayClusterMockInstance := rayv1.RayCluster{
+			Spec: rayClusterSpecMock,
+		}
+		submitterPodTemplate := raycommon.GetDefaultSubmitterTemplate(&rayClusterMockInstance)
+		submitterPodTemplate.Spec.ServiceAccountName = rayJob.SubmitterPodServiceAccountName
+		rayJobObject.Spec.SubmitterPodTemplate = &submitterPodTemplate
+	}
+	// create a mock ray cluster
 
 	return &rayJobObject, nil
 }

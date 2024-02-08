@@ -181,6 +181,9 @@ pub struct RayJob {
     /// ttl_seconds_after_finished specifies the number of seconds after which the RayCluster will be deleted after the RayJob finishes.
     #[prost(int32, tag="4")]
     pub ttl_seconds_after_finished: i32,
+    /// submitter_pod_service_account_name specifies the serviceAccount for submitterPodTemplate
+    #[prost(string, tag="5")]
+    pub submitter_pod_service_account_name: ::prost::alloc::string::String,
 }
 /// Define Ray cluster defines the desired state of RayCluster
 #[allow(clippy::derive_partial_eq_without_eq)]
