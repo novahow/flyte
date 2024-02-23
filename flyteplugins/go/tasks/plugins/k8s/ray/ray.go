@@ -210,11 +210,15 @@ func (rayJobResourceHandler) BuildResource(ctx context.Context, taskCtx pluginsC
 	}
 
 	if rayJob.SubmitterPodServiceAccountName != "" {
+		// Deepcopy to prevent modifying the original pod settings
+		submitterPodContainer := *headPodSpec.Containers[primaryContainerIdx].DeepCopy()
+		submitterPodSpec := podSpec.DeepCopy()
+		// Create a mock cluster spec since raycommon is incompatible with rayv1alpha1
 		rayClusterSpecMock := rayv1.RayClusterSpec{
 			HeadGroupSpec: rayv1.HeadGroupSpec{
 				Template: buildHeadPodTemplate(
-					&headPodSpec.Containers[primaryContainerIdx],
-					headPodSpec,
+					&submitterPodContainer,
+					submitterPodSpec,
 					objectMeta,
 					taskCtx,
 				),
@@ -227,7 +231,6 @@ func (rayJobResourceHandler) BuildResource(ctx context.Context, taskCtx pluginsC
 		submitterPodTemplate.Spec.ServiceAccountName = rayJob.SubmitterPodServiceAccountName
 		rayJobObject.Spec.SubmitterPodTemplate = &submitterPodTemplate
 	}
-	// create a mock ray cluster
 
 	return &rayJobObject, nil
 }
