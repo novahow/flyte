@@ -291,6 +291,9 @@ func BuildRawPod(ctx context.Context, tCtx pluginsCore.TaskExecutionContext) (*v
 		}
 
 		err := utils.UnmarshalStructToObj(target.K8SPod.PodSpec, &podSpec)
+		for containerIndex, _ := range podSpec.Containers {
+			podSpec.Containers[containerIndex].ImagePullPolicy = config.GetK8sPluginConfig().ImagePullPolicy
+		}
 		if err != nil {
 			return nil, nil, "", pluginserrors.Errorf(pluginserrors.BadTaskSpecification,
 				"Unable to unmarshal task k8s pod [%v], Err: [%v]", target.K8SPod.PodSpec, err.Error())
