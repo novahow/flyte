@@ -24,6 +24,7 @@ import (
 	config1 "github.com/flyteorg/flyte/flytestdlib/config"
 	"github.com/flyteorg/flyte/flytestdlib/config/viper"
 	"github.com/flyteorg/flyte/flytestdlib/storage"
+	"google.golang.org/protobuf/types/known/structpb"
 )
 
 func dummyTaskExecutionMetadata(resources *v1.ResourceRequirements, extendedResources *core.ExtendedResources, containerImage string) pluginsCore.TaskExecutionMetadata {
@@ -97,6 +98,36 @@ func dummyExecContext(taskTemplate *core.TaskTemplate, r *v1.ResourceRequirement
 	taskReader.On("Read", mock.Anything).Return(taskTemplate, nil)
 	tCtx.OnTaskReader().Return(taskReader)
 	return tCtx
+}
+
+func dummyK8sPod() *core.TaskTemplate {
+	podSpec := &v1.PodSpec{
+		Containers: []v1.Container{
+			{
+				Name:  "pullerContainer",
+				Image: "image",
+			},
+		},
+	}
+	// convert podSpec to structpb.Struct
+	podSpecBytes, err := json.Marshal(podSpec); if err != nil {
+		panic(err)
+	}
+	marshalledPodSpec := map[string]interface{}{}
+	err = json.Unmarshal(podSpecBytes, &marshalledPodSpec)
+	pbStruct, err := structpb.NewStruct(marshalledPodSpec); if err != nil {
+		panic(err)
+	}
+	return &core.TaskTemplate{
+		Target: &core.TaskTemplate_K8SPod{
+			K8SPod: &core.K8SPod{
+				PodSpec: pbStruct,
+			},
+		},
+		Config: map[string]string{
+			"primary_container_name": "pullerContainer",
+		},
+	}
 }
 
 func TestPodSetup(t *testing.T) {
@@ -2183,6 +2214,51 @@ func TestAddFlyteCustomizationsToContainer_SetConsoleUrl(t *testing.T) {
 				}
 				t.Fail()
 			}
+		})
+	}
+}
+
+
+func TestAddTemplateK8sPodImagePull(t *testing.T) {
+	ctx := context.TODO()
+	tests := []struct {
+		name                   string
+		imagePullPolicy        v1.PullPolicy
+		expectedImagePullPolicy v1.PullPolicy
+	}{
+		{
+			name:                   "image pull policy is not set",
+			imagePullPolicy:        "",
+			expectedImagePullPolicy: "",
+		},
+		{
+			name:                   "image pull policy is set to Always",
+			imagePullPolicy:        v1.PullAlways,
+			expectedImagePullPolicy: v1.PullAlways,
+		},
+		{
+			name:                   "image pull policy is set to IfNotPresent",
+			imagePullPolicy:        v1.PullIfNotPresent,
+			expectedImagePullPolicy: v1.PullIfNotPresent,
+		},
+		{
+			name:                   "image pull policy is set to Never",
+			imagePullPolicy:        v1.PullNever,
+			expectedImagePullPolicy: v1.PullNever,
+		},
+	}
+
+	
+	
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			config.SetK8sPluginConfig(&config.K8sPluginConfig{
+				ImagePullPolicy: tt.imagePullPolicy,
+			})
+			x := dummyExecContext(dummyK8sPod(), nil, nil, "")
+			p, _, _, err := ToK8sPodSpec(ctx, x)
+			assert.NoError(t, err)
+			assert.Equal(t, tt.expectedImagePullPolicy, p.Containers[0].ImagePullPolicy)
 		})
 	}
 }
